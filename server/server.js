@@ -43,11 +43,9 @@ app.post("/api/signin", (req, res) => {
 
 const token_verify = (req) => {
   if (req.headers["token"] === undefined) {
-    console.log("header is undefined");
     return { success: false }
   }
 
-  console.log("hello")
   const token = req.headers["token"].split(" ")[1];
   const verify = jwt.verify(token, jwt_config.secretKey, (err, decoded) => {
     if (err) {
@@ -59,8 +57,6 @@ const token_verify = (req) => {
 }
 
 app.get("/api/validuser", async (req, res) => {
-  console.log(req.header);
-  console.log(req.headers);
   const decode = token_verify(req);
 
   if (!decode.success)
